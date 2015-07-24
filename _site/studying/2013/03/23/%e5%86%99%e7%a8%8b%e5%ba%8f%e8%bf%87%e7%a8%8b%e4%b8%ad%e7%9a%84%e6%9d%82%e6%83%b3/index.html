@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-gb">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>写程序过程中的杂想</title>
+	<meta name="author" content="inet" />
+	<link rel="stylesheet" href="/css/screen.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/tablet.css" type="text/css" media="screen and (min-width:651px) and (max-width: 1024px), screen and (min-device-width: 768px) and (max-device-width: 1024px)" />
+	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, screen and (max-width: 650px), screen and (max-device-width: 480px)" />
+     <link rel="stylesheet" href="/css/pygments.css">
+</head>
+<body>
+	<div class="site">
+		<div class="title"><a href="/">观海听涛<br/>Waiting for you</a></div>
+		<div id="post">
+	<h1>写程序过程中的杂想</h1>
+	<p class="meta">23 Mar 2013</p>
+	<p>昨天改了个程序，测试了一下，发现在某一个线程算出结果并退出后，其它线程不能立即退出（设全局标志量了，并且算出结果的线程也改标志量了）。没仔细研究，就想着可能是对全局变量的操作考虑得不够周全，互斥，读写锁，条件变量这些都没用上。于是就开始改程序了，查资料，调试，调试，调试...一晚上没搞定，资料查得我头都晕了，程序始终是那样，搞得很无奈啊。</p>
+<p>今天早上接着调，还是那样。我有些怀疑自己的看法是不是正确的了，于是静下心来仔细分析了一下程序应该呈现的行为，尼玛，昨天出现的那个根本就不是问题，程序本来就该这样的。什么互斥，条件变量这些根本用不着，用了只会让程序运行得更慢，因为对全局变量的一条flag=1操作本来就是原子操作，不用担心中断会引发问题，也不存在两个线程同时写这一个变量的情况，就是有也不会出现问题。</p>
+<p>以上全是废话，我想说的是，不经过仔细推敲不要去改程序，要不然只会越改越乱，也不要盲目的去使用一些东西，只有理解了这些东西的本质以及何时该使用之后，才能让它们为我所用，而不是成为一个累赘。望自己以此为训，提高效率，不要做一些无用功。</p>
+
+
+</div>
+
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>20 May 2014</span> <span class="seperator">~</span> <a href="/2014/05/20/mysql%E8%AF%AD%E5%8F%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8C%96/">对mysql语句的性能分析与优化</a></li>
+    
+      <li><span>04 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/04/linux%E4%B8%8B%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6%E8%83%BD%E8%B6%85%E8%BF%872G%E5%90%97/">Linux下生成的文件能超过2G吗？</a></li>
+    
+      <li><span>01 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/01/%E4%B8%80%E6%AE%B5%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%86%E6%9E%90/">对一段程序的分析</a></li>
+    
+  </ul>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'inetkillergithubio'; // required: replace example with your forum shortname
+                
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+		<div class="footer" align="center">
+            	<table>
+                <tr>
+                    <td>I'm on Github</td>
+                    <td><a target="_blank" href="http://github.com/inetkiller/">github.com/inetkiller</a></td>
+                </tr>
+				<tr>
+					<td>Twitter</td>
+					<td><a target="_blank" href="https://twitter.com/tangyimc">twitter.com/tangyimc</a></td>
+				</tr>
+                <tr>
+                    <td>Contact me</td>
+                    <td>tinetkiller@gmail.com</td>
+		 </tr>
+            	</table>
+        	</div>
+	</div>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-4155555-8']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+<html>

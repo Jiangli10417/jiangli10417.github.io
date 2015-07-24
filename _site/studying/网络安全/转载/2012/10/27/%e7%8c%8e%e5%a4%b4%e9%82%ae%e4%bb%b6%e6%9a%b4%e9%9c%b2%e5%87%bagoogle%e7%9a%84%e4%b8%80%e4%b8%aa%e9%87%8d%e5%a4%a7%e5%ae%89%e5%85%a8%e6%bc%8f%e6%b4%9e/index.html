@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-gb">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>猎头邮件暴露出Google的一个重大安全漏洞</title>
+	<meta name="author" content="inet" />
+	<link rel="stylesheet" href="/css/screen.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/tablet.css" type="text/css" media="screen and (min-width:651px) and (max-width: 1024px), screen and (min-device-width: 768px) and (max-device-width: 1024px)" />
+	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, screen and (max-width: 650px), screen and (max-device-width: 480px)" />
+     <link rel="stylesheet" href="/css/pygments.css">
+</head>
+<body>
+	<div class="site">
+		<div class="title"><a href="/">观海听涛<br/>Waiting for you</a></div>
+		<div id="post">
+	<h1>猎头邮件暴露出Google的一个重大安全漏洞</h1>
+	<p class="meta">27 Oct 2012</p>
+	<p>《连线》<a href="http://www.wired.com/threatlevel/2012/10/dkim-vulnerability-widespread/all/">报导</a>，数学家Zachary Harris去年12月突然收到了Google猎头发来了招聘邮件，询问他是否对网站可靠性工程师这个职位感兴趣。Harris怀疑邮件可能是骗子发来的，然而检查邮件头信息发现它确实是来自google.com的合法邮件。他接着注意到Google使用了一种弱加密密钥（512位<a href="http://en.wikipedia.org/wiki/DKIM">DomainKeys Identified Mail</a>密钥，DKIM标准推荐使用1024位密钥）去签名发件人验证收件人，任何破解密钥的人都可以用它去冒充来自Google的发件人，包括创始人Sergey Brin和Larry Page。Harris对Google的工作不感兴趣，但他决定破解密钥，然后分别以Brin和Page的名义向彼此发送邮件，内容是他个人网站的网址。他本以为Brin和Page可能会回信询问，结果他们根本没回信。2天后，他注意到Google将加密密钥增加到2048位，而他的网站突然增加了大量来自Google IP的访问流量。</p>
+
+
+</div>
+
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>20 May 2014</span> <span class="seperator">~</span> <a href="/2014/05/20/mysql%E8%AF%AD%E5%8F%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8C%96/">对mysql语句的性能分析与优化</a></li>
+    
+      <li><span>04 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/04/linux%E4%B8%8B%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6%E8%83%BD%E8%B6%85%E8%BF%872G%E5%90%97/">Linux下生成的文件能超过2G吗？</a></li>
+    
+      <li><span>01 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/01/%E4%B8%80%E6%AE%B5%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%86%E6%9E%90/">对一段程序的分析</a></li>
+    
+  </ul>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'inetkillergithubio'; // required: replace example with your forum shortname
+                
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+		<div class="footer" align="center">
+            	<table>
+                <tr>
+                    <td>I'm on Github</td>
+                    <td><a target="_blank" href="http://github.com/inetkiller/">github.com/inetkiller</a></td>
+                </tr>
+				<tr>
+					<td>Twitter</td>
+					<td><a target="_blank" href="https://twitter.com/tangyimc">twitter.com/tangyimc</a></td>
+				</tr>
+                <tr>
+                    <td>Contact me</td>
+                    <td>tinetkiller@gmail.com</td>
+		 </tr>
+            	</table>
+        	</div>
+	</div>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-4155555-8']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+<html>

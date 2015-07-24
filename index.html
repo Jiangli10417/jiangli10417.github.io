@@ -1,67 +1,40 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>关于多线程和多进程的思考 by Jiangli10417</title>
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-dark.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="javascripts/respond.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <!--[if lt IE 8]>
-    <link rel="stylesheet" href="stylesheets/ie.css">
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+---
+layout: default
+title: jiangli10417
+---
 
-  </head>
-  <body>
-      <div id="header">
-        <nav>
-          <li class="fork"><a href="https://github.com/Jiangli10417">View On GitHub</a></li>
-        </nav>
-      </div><!-- end header -->
+<div id="home">
+  <h1>Blog Posts</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
 
-    <div class="wrapper">
+  <h1>Highlighted Media</h1>
+  <ul class="posts">
+    <li><span>02 Sep 2013</span> &raquo; <a href="http://www.wired.com/wiredenterprise/2013/09/github-for-anything/all/">Article: WIRED - GitHub Is Going Mainstream</a></li>
+    <li><span>09 Nov 2011</span> &raquo; <a href="http://vimeo.com/39016099">Video: RubyConf Argentina - Optimizing For Happiness</a></li>
+    <li><span>01 Oct 2011</span> &raquo; <a href="http://confreaks.com/videos/712-rubyconf2011-github-flavored-ruby">Video: RubyConf - GitHub Flavored Ruby</a></li>
+    <li><span>23 Nov 2010</span> &raquo; <a href="http://vimeo.com/17118008">Video: Erlang Factory - Mastering Git Basics</a></li>
+  </ul>
 
-      <section>
-        <div id="title">
-          <h1>关于多线程和多进程的思考</h1>
-          <p>多线程多进程</p>
-          <hr>
-          <span class="credits left">Project maintained by <a href="https://github.com/Jiangli10417">Jiangli10417</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
-        </div>
+  <h1>Other Interviews, Talks, Etc</h1>
+  <ul class="posts">
+    <li><span>02 Apr 2005</span> &raquo; <a href="http://joshuaink2006.johnoxton.co.uk/blog/240/seven-and-a-half-questions-for-tom-werner">JoshuaInk: Seven and a half questions for Tom Werner</a></li>
+  </ul>
 
-        <hr>
-
-<h1>
-<a id="关于多线程和多进程的思考" class="anchor" href="#%E5%85%B3%E4%BA%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%80%9D%E8%80%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>关于多线程和多进程的思考</h1>
-
-<blockquote>
-<p>本文主要是讲述在各个编程语言（包括：C,C++,PHP,Java,Python）下，多线程和多进程的创建和使用方式、注意点以及他们之间的优缺点。最后会对多线程和多进程的具体原理，内存管理，死锁，通信等其他知识进行描述。</p>
-</blockquote>
-
-<hr>
-
-<h2>
-<a id="c语言" class="anchor" href="#c%E8%AF%AD%E8%A8%80" aria-hidden="true"><span class="octicon octicon-link"></span></a>C语言</h2>
-
-<blockquote>
-<p>C语言是最基本的语言，元老级的语言，最先用来讲解对后来的其他语言的讲解更加方便易懂。</p>
-
-<h3>
-<a id="多线程" class="anchor" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>多线程</h3>
-
-<h3>
-<a id="多进程" class="anchor" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>多进程</h3>
-</blockquote>
-      </section>
-
-    </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-    
-  </body>
-</html>
+  <h1>Noteworthy Open Source Projects and Specifications</h1>
+  <ul class="posts">
+    <li><a href="http://github.com/jekyll/jekyll/">Jekyll:</a> A simple, blog aware, static site generator (used for this site).</li>
+    <li><a href="http://semver.org">Semantic Versioning:</a> A meaningful method for incrementing version numbers.</li>
+    <li><a href="http://github.com/toml-lang/toml">TOML:</a> Tom's Obvious, Minimal Language.</li>
+    <li><a href="http://github.com/mojombo/god/">God:</a> Ruby process monitoring framework with easy extensibility.</li>
+    <li><a href="http://github.com/mojombo/chronic/">Chronic:</a> Ruby natural language date/time parser.</li>
+    <li><a href="http://http://tomdoc.org">TomDoc:</a> Code documentation for humans.</li>
+    <li><a href="http://github.com/mojombo/proxymachine/">ProxyMachine:</a> Layer 7 routing proxy in Ruby with Event Machine.</li>
+    <li><a href="http://github.com/github/gollum/">Gollum:</a> A simple, Git-powered wiki with a sweet API and local frontend.</li>
+    <li><a href="http://github.com/mojombo/grit/">Grit:</a> Object oriented Ruby bindings for Git (used by GitHub).</li>
+    <li><a href="http://github.com/mojombo/ernie/">Ernie:</a> Ruby/Erlang Hybrid BERT-RPC server.</li>
+  </ul>
+</div>

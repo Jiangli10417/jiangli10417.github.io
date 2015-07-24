@@ -1,0 +1,1 @@
+{"name":"关于多线程和多进程的思考","tagline":"多线程多进程","body":"***\r\n# 关于多线程和多进程的思考\r\n> 本文主要是讲述在各个编程语言（包括：C,C++,PHP,Java,Python）下，多线程和多进程的创建和使用方式、注意点以及他们之间的优缺点。最后会对多线程和多进程的具体原理，内存管理，死锁，通信等其他知识进行描述。\r\n\r\n***\r\n## C语言\r\n> C语言是最基本的语言，元老级的语言，最先用来讲解对后来的其他语言的讲解更加方便易懂。\r\n### 多线程\r\n### 多进程","google":"","note":"Don't delete this file! It's used internally to help with page regeneration."}

@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>关于多线程和多进程的思考 by Jiangli10417</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/Jiangli10417">View On GitHub</a></li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>关于多线程和多进程的思考</h1>
+          <p>多线程多进程</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/Jiangli10417">Jiangli10417</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <hr>
+
+<h1>
+<a id="关于多线程和多进程的思考" class="anchor" href="#%E5%85%B3%E4%BA%8E%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84%E6%80%9D%E8%80%83" aria-hidden="true"><span class="octicon octicon-link"></span></a>关于多线程和多进程的思考</h1>
+
+<blockquote>
+<p>本文主要是讲述在各个编程语言（包括：C,C++,PHP,Java,Python）下，多线程和多进程的创建和使用方式、注意点以及他们之间的优缺点。最后会对多线程和多进程的具体原理，内存管理，死锁，通信等其他知识进行描述。</p>
+</blockquote>
+
+<hr>
+
+<h2>
+<a id="c语言" class="anchor" href="#c%E8%AF%AD%E8%A8%80" aria-hidden="true"><span class="octicon octicon-link"></span></a>C语言</h2>
+
+<blockquote>
+<p>C语言是最基本的语言，元老级的语言，最先用来讲解对后来的其他语言的讲解更加方便易懂。</p>
+
+<h3>
+<a id="多线程" class="anchor" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>多线程</h3>
+
+<h3>
+<a id="多进程" class="anchor" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>多进程</h3>
+</blockquote>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>

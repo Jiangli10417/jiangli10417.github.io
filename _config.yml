@@ -1,6 +1,2 @@
-#baseurl: /jiangli10417.github.io
-permalink: pretty
-pygments: true
-favicon: /favicon.ico
-markdown: kramdown
-#markdown: maruku
+markdown: rdiscount
+highlighter: pygments
