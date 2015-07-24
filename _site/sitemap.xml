@@ -1,4 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-gb">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title></title>
+	<meta name="author" content="inet" />
+	<link rel="stylesheet" href="/css/syntax.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/screen.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/tablet.css" type="text/css" media="screen and (min-width:651px) and (max-width: 1024px), screen and (min-device-width: 768px) and (max-device-width: 1024px)" />
+	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, screen and (max-width: 650px), screen and (max-device-width: 480px)" />
+</head>
+<body>
+	<div class="site">
+		<div class="title"><a href="/">Jiangli10417<br/>Waiting for you</a></div>
+		<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	<url>
 		<loc>/</loc>
@@ -6,133 +20,163 @@
 	</url>
 	
 	<url>
-		<loc>/2014/05/20/mysql%E8%AF%AD%E5%8F%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8C%96/</loc>
+		<loc>/2014/05/20/mysql%E8%AF%AD%E5%8F%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8C%96.html</loc>
 		<lastmod>2014-05-20</lastmod>
 	</url>
 	
 	<url>
-		<loc>/2014/04/04/linux%E4%B8%8B%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6%E8%83%BD%E8%B6%85%E8%BF%872G%E5%90%97/</loc>
+		<loc>/2014/04/04/linux%E4%B8%8B%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6%E8%83%BD%E8%B6%85%E8%BF%872G%E5%90%97.html</loc>
 		<lastmod>2014-04-04</lastmod>
 	</url>
 	
 	<url>
-		<loc>/2014/04/01/%E4%B8%80%E6%AE%B5%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%86%E6%9E%90/</loc>
+		<loc>/2014/04/01/%E4%B8%80%E6%AE%B5%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%86%E6%9E%90.html</loc>
 		<lastmod>2014-04-01</lastmod>
 	</url>
 	
 	<url>
-		<loc>/2014/03/30/UNIX%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+		<loc>/2014/03/30/UNIX%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89.html</loc>
 		<lastmod>2014-03-30</lastmod>
 	</url>
 	
 	<url>
-		<loc>/2014/03/26/TCP%E8%BF%9E%E6%8E%A5%E7%BB%88%E6%AD%A2%E4%B8%8ETIME_WAIT%E7%8A%B6%E6%80%81/</loc>
+		<loc>/2014/03/26/TCP%E8%BF%9E%E6%8E%A5%E7%BB%88%E6%AD%A2%E4%B8%8ETIME_WAIT%E7%8A%B6%E6%80%81.html</loc>
 		<lastmod>2014-03-26</lastmod>
 	</url>
 	
 	<url>
-		<loc>/2014/03/24/%E5%8F%B0%E6%B9%BE%E7%88%B6%E4%BA%B2%E5%86%99%E7%BB%99%E6%8A%97%E8%AE%AE%E5%A5%B3%E5%84%BF%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1/</loc>
+		<loc>/2014/03/24/%E5%8F%B0%E6%B9%BE%E7%88%B6%E4%BA%B2%E5%86%99%E7%BB%99%E6%8A%97%E8%AE%AE%E5%A5%B3%E5%84%BF%E7%9A%84%E4%B8%80%E5%B0%81%E4%BF%A1.html</loc>
 		<lastmod>2014-03-24</lastmod>
 	</url>
 	
 	<url>
-		<loc>/studying/2013/08/26/%25e4%25b8%258d%25e4%25bb%25a5%25e5%2596%2584%25e5%25b0%258f%25e8%2580%258c%25e4%25b8%258d%25e4%25b8%25ba/</loc>
+		<loc>/studying/2013/08/26/%25e4%25b8%258d%25e4%25bb%25a5%25e5%2596%2584%25e5%25b0%258f%25e8%2580%258c%25e4%25b8%258d%25e4%25b8%25ba.html</loc>
 		<lastmod>2013-08-26</lastmod>
 	</url>
 	
 	<url>
-		<loc>/linux/studying/2013/05/25/%25e6%25b8%25a9%25e6%2595%2585%25e8%2580%258c%25e7%259f%25a5%25e6%2596%25b0%25e4%25b9%258b%25e8%2599%259a%25e6%258b%259f%25e5%25ad%2598%25e5%2582%25a8%25e5%2599%25a8/</loc>
+		<loc>/linux/studying/2013/05/25/%25e6%25b8%25a9%25e6%2595%2585%25e8%2580%258c%25e7%259f%25a5%25e6%2596%25b0%25e4%25b9%258b%25e8%2599%259a%25e6%258b%259f%25e5%25ad%2598%25e5%2582%25a8%25e5%2599%25a8.html</loc>
 		<lastmod>2013-05-25</lastmod>
 	</url>
 	
 	<url>
-		<loc>/life/2013/05/11/%25e4%25b8%25b2%25e4%25b8%25b2%25e7%2583%25a7/</loc>
+		<loc>/life/2013/05/11/%25e4%25b8%25b2%25e4%25b8%25b2%25e7%2583%25a7.html</loc>
 		<lastmod>2013-05-11</lastmod>
 	</url>
 	
 	<url>
-		<loc>/studying/%E8%BD%AC%E8%BD%BD/2013/05/10/java-hashmap%25e7%259a%2584%25e6%25ad%25bb%25e5%25be%25aa%25e7%258e%25af/</loc>
+		<loc>/studying/%E8%BD%AC%E8%BD%BD/2013/05/10/java-hashmap%25e7%259a%2584%25e6%25ad%25bb%25e5%25be%25aa%25e7%258e%25af.html</loc>
 		<lastmod>2013-05-10</lastmod>
 	</url>
 	
 	<url>
-		<loc>/life/2013/04/25/%25e4%25ba%25ba%25e5%259c%25a8%25e5%25af%2582%25e5%25af%259e%25e4%25b8%25ad/</loc>
+		<loc>/life/2013/04/25/%25e4%25ba%25ba%25e5%259c%25a8%25e5%25af%2582%25e5%25af%259e%25e4%25b8%25ad.html</loc>
 		<lastmod>2013-04-25</lastmod>
 	</url>
 	
 	<url>
-		<loc>/linux/studying/2013/04/21/%25e5%259c%25a8linux%25e4%25b8%258b%25e6%2590%25ad%25e5%25bb%25baphp%25e5%25bc%2580%25e5%258f%2591%25e7%258e%25af%25e5%25a2%2583%25e8%25ae%25b0%25e5%25ae%259e%25e4%25ba%258c/</loc>
+		<loc>/linux/studying/2013/04/21/%25e5%259c%25a8linux%25e4%25b8%258b%25e6%2590%25ad%25e5%25bb%25baphp%25e5%25bc%2580%25e5%258f%2591%25e7%258e%25af%25e5%25a2%2583%25e8%25ae%25b0%25e5%25ae%259e%25e4%25ba%258c.html</loc>
 		<lastmod>2013-04-21</lastmod>
 	</url>
 	
 	<url>
-		<loc>/life/2013/04/04/%25e5%259b%259b%25e6%259c%2588%25e5%259b%259b%25e6%2597%25a5/</loc>
+		<loc>/life/2013/04/04/%25e5%259b%259b%25e6%259c%2588%25e5%259b%259b%25e6%2597%25a5.html</loc>
 		<lastmod>2013-04-04</lastmod>
 	</url>
 	
 	<url>
-		<loc>/studying/2013/04/03/%25e6%25b2%25a1%25e6%259c%2589%25e9%2582%25a3%25e4%25b8%25aa%25e8%2583%25bd%25e5%258a%259b%25e5%25b0%25b1%25e4%25b8%258d%25e8%25a6%2581%25e5%2587%25ba%25e6%259d%25a5%25e7%25a5%25b8%25e5%25ae%25b3%25e4%25ba%25ba%25e6%25b0%2591/</loc>
+		<loc>/studying/2013/04/03/%25e6%25b2%25a1%25e6%259c%2589%25e9%2582%25a3%25e4%25b8%25aa%25e8%2583%25bd%25e5%258a%259b%25e5%25b0%25b1%25e4%25b8%258d%25e8%25a6%2581%25e5%2587%25ba%25e6%259d%25a5%25e7%25a5%25b8%25e5%25ae%25b3%25e4%25ba%25ba%25e6%25b0%2591.html</loc>
 		<lastmod>2013-04-03</lastmod>
 	</url>
 	
 	<url>
-		<loc>/studying/2013/03/26/%25e6%2595%25b0%25e5%25ad%25a6%25e5%25ae%25b6%25e7%259a%2584%25e5%25b9%25bd%25e9%25bb%2598/</loc>
+		<loc>/studying/2013/03/26/%25e6%2595%25b0%25e5%25ad%25a6%25e5%25ae%25b6%25e7%259a%2584%25e5%25b9%25bd%25e9%25bb%2598.html</loc>
 		<lastmod>2013-03-26</lastmod>
 	</url>
 	
 	<url>
-		<loc>/studying/2013/03/23/%25e5%2586%2599%25e7%25a8%258b%25e5%25ba%258f%25e8%25bf%2587%25e7%25a8%258b%25e4%25b8%25ad%25e7%259a%2584%25e6%259d%2582%25e6%2583%25b3/</loc>
+		<loc>/studying/2013/03/23/%25e5%2586%2599%25e7%25a8%258b%25e5%25ba%258f%25e8%25bf%2587%25e7%25a8%258b%25e4%25b8%25ad%25e7%259a%2584%25e6%259d%2582%25e6%2583%25b3.html</loc>
 		<lastmod>2013-03-23</lastmod>
 	</url>
 	
 	<url>
-		<loc>/life/2012/11/07/%25e5%25b0%2591%25e5%25b9%25b4%25ef%25bc%258c%25e5%2588%25ab%25e5%2593%25ad/</loc>
+		<loc>/life/2012/11/07/%25e5%25b0%2591%25e5%25b9%25b4%25ef%25bc%258c%25e5%2588%25ab%25e5%2593%25ad.html</loc>
 		<lastmod>2012-11-07</lastmod>
 	</url>
 	
 	<url>
-		<loc>/life/%E8%BD%AC%E8%BD%BD/2012/10/27/%25e7%25ba%25aa%25e5%25bf%25b5%25e9%2583%2591%25e5%25ae%258f%25e7%258f%258d%25e5%2590%259b/</loc>
+		<loc>/life/%E8%BD%AC%E8%BD%BD/2012/10/27/%25e7%25ba%25aa%25e5%25bf%25b5%25e9%2583%2591%25e5%25ae%258f%25e7%258f%258d%25e5%2590%259b.html</loc>
 		<lastmod>2012-10-27</lastmod>
 	</url>
 	
 	<url>
-		<loc>/studying/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E8%BD%AC%E8%BD%BD/2012/10/27/%25e7%258c%258e%25e5%25a4%25b4%25e9%2582%25ae%25e4%25bb%25b6%25e6%259a%25b4%25e9%259c%25b2%25e5%2587%25bagoogle%25e7%259a%2584%25e4%25b8%2580%25e4%25b8%25aa%25e9%2587%258d%25e5%25a4%25a7%25e5%25ae%2589%25e5%2585%25a8%25e6%25bc%258f%25e6%25b4%259e/</loc>
+		<loc>/studying/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E8%BD%AC%E8%BD%BD/2012/10/27/%25e7%258c%258e%25e5%25a4%25b4%25e9%2582%25ae%25e4%25bb%25b6%25e6%259a%25b4%25e9%259c%25b2%25e5%2587%25bagoogle%25e7%259a%2584%25e4%25b8%2580%25e4%25b8%25aa%25e9%2587%258d%25e5%25a4%25a7%25e5%25ae%2589%25e5%2585%25a8%25e6%25bc%258f%25e6%25b4%259e.html</loc>
 		<lastmod>2012-10-27</lastmod>
 	</url>
 	
 	<url>
-		<loc>/life/2012/10/27/%25e5%25bd%2593%25e4%25bd%25a0%25e9%2581%2597%25e5%25bf%2598%25e8%25bf%2599%25e4%25b8%25aa%25e4%25b8%2596%25e7%2595%258c%25e7%259a%2584%25e6%2597%25b6%25e5%2580%2599%25ef%25bc%258c%25e5%25b9%25b8%25e7%25a6%258f%25e5%25b0%25b1%25e6%259d%25a5%25e6%2595%25b2%25e9%2597%25a8/</loc>
+		<loc>/life/2012/10/27/%25e5%25bd%2593%25e4%25bd%25a0%25e9%2581%2597%25e5%25bf%2598%25e8%25bf%2599%25e4%25b8%25aa%25e4%25b8%2596%25e7%2595%258c%25e7%259a%2584%25e6%2597%25b6%25e5%2580%2599%25ef%25bc%258c%25e5%25b9%25b8%25e7%25a6%258f%25e5%25b0%25b1%25e6%259d%25a5%25e6%2595%25b2%25e9%2597%25a8.html</loc>
 		<lastmod>2012-10-27</lastmod>
 	</url>
 	
 	<url>
-		<loc>/life/2012/10/17/%25e7%25a7%2592%25e9%2580%259f%25e4%25ba%2594%25e5%258e%2598%25e7%25b1%25b3%25ef%25bc%2588%25e5%2589%25a7%25e9%2580%258f%25ef%25bc%258c%25e6%2585%258e%25e5%2585%25a5%25ef%25bc%2589/</loc>
+		<loc>/life/2012/10/17/%25e7%25a7%2592%25e9%2580%259f%25e4%25ba%2594%25e5%258e%2598%25e7%25b1%25b3%25ef%25bc%2588%25e5%2589%25a7%25e9%2580%258f%25ef%25bc%258c%25e6%2585%258e%25e5%2585%25a5%25ef%25bc%2589.html</loc>
 		<lastmod>2012-10-17</lastmod>
 	</url>
 	
 	<url>
-		<loc>/life/2012/10/17/%25e6%25b2%2599%25e4%25bc%2598%25e9%2582%25a3%25e6%258b%2589inuyasha/</loc>
+		<loc>/life/2012/10/17/%25e6%25b2%2599%25e4%25bc%2598%25e9%2582%25a3%25e6%258b%2589inuyasha.html</loc>
 		<lastmod>2012-10-17</lastmod>
 	</url>
 	
 	<url>
-		<loc>/linux/studying/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/2012/10/14/%25e5%25af%25b9ppp%25e7%259a%2584%25e8%25ae%25a4%25e8%25af%2581%25e6%2596%25b9%25e5%25bc%258f%25e8%25bf%259b%25e8%25a1%258c%25e5%259b%259e%25e6%25ba%25af%25e6%2594%25bb%25e5%2587%25bb%25e7%25ac%2594%25e8%25ae%25b0/</loc>
+		<loc>/linux/studying/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/2012/10/14/%25e5%25af%25b9ppp%25e7%259a%2584%25e8%25ae%25a4%25e8%25af%2581%25e6%2596%25b9%25e5%25bc%258f%25e8%25bf%259b%25e8%25a1%258c%25e5%259b%259e%25e6%25ba%25af%25e6%2594%25bb%25e5%2587%25bb%25e7%25ac%2594%25e8%25ae%25b0.html</loc>
 		<lastmod>2012-10-14</lastmod>
 	</url>
 	
 	<url>
-		<loc>/linux/studying/2012/10/13/%25e5%259c%25a8linux%25e4%25b8%258b%25e6%2590%25ad%25e5%25bb%25baphp%25e5%25bc%2580%25e5%258f%2591%25e7%258e%25af%25e5%25a2%2583%25e8%25ae%25b0%25e5%25ae%259e%25e4%25b8%2580/</loc>
+		<loc>/linux/studying/2012/10/13/%25e5%259c%25a8linux%25e4%25b8%258b%25e6%2590%25ad%25e5%25bb%25baphp%25e5%25bc%2580%25e5%258f%2591%25e7%258e%25af%25e5%25a2%2583%25e8%25ae%25b0%25e5%25ae%259e%25e4%25b8%2580.html</loc>
 		<lastmod>2012-10-13</lastmod>
 	</url>
 	
 	<url>
-		<loc>/studying/2012/10/09/wordpress%25e7%259a%2584gravatar%25e5%25a4%25b4%25e5%2583%258f%25e8%25ae%25be%25e7%25bd%25ae/</loc>
+		<loc>/studying/2012/10/09/wordpress%25e7%259a%2584gravatar%25e5%25a4%25b4%25e5%2583%258f%25e8%25ae%25be%25e7%25bd%25ae.html</loc>
 		<lastmod>2012-10-09</lastmod>
 	</url>
 	
 	<url>
-		<loc>/linux/studying/2012/10/08/%25e5%25ae%259e%25e7%258e%25b0ssh%25e7%2594%25a8%25e6%2588%25b7%25e9%2580%2580%25e5%2587%25ba%25e4%25b9%258b%25e5%2590%258e%25e5%2585%25b6%25e7%25a8%258b%25e5%25ba%258f%25e7%25bb%25a7%25e7%25bb%25ad%25e8%25bf%2590%25e8%25a1%258c/</loc>
+		<loc>/linux/studying/2012/10/08/%25e5%25ae%259e%25e7%258e%25b0ssh%25e7%2594%25a8%25e6%2588%25b7%25e9%2580%2580%25e5%2587%25ba%25e4%25b9%258b%25e5%2590%258e%25e5%2585%25b6%25e7%25a8%258b%25e5%25ba%258f%25e7%25bb%25a7%25e7%25bb%25ad%25e8%25bf%2590%25e8%25a1%258c.html</loc>
 		<lastmod>2012-10-08</lastmod>
 	</url>
 	
 </urlset>
+
+		<div class="footer">
+            	<table>
+                <tr>
+                    <td>I'm on Github</td>
+                    <td><a target="_blank" href="http://github.com/Jiangli10417/">github.com/Jiangli10417</a></td>
+                </tr>
+                <tr>
+                    <td>Contact me</td>
+                    <td>jiangli10417@gmail.com</td>
+		 </tr>
+            	</table>
+        	</div>
+	</div>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-4155555-8']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+<html>
