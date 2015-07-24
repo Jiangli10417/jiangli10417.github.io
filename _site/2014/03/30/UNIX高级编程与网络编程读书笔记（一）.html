@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-gb">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>UNIX高级编程与网络编程读书笔记（一）</title>
+	<meta name="author" content="inet" />
+	<link rel="stylesheet" href="/css/screen.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/tablet.css" type="text/css" media="screen and (min-width:651px) and (max-width: 1024px), screen and (min-device-width: 768px) and (max-device-width: 1024px)" />
+	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, screen and (max-width: 650px), screen and (max-device-width: 480px)" />
+     <link rel="stylesheet" href="/css/pygments.css">
+</head>
+<body>
+	<div class="site">
+		<div class="title"><a href="/">Jiangli10417<br/>Waiting for you</a></div>
+		<div id="post">
+	<h1>UNIX高级编程与网络编程读书笔记（一）</h1>
+	<p class="meta">30 Mar 2014</p>
+	<p>最近在看<a href="http://baike.baidu.com/link?url=J0LjTlo_YslKSDv3F0jlDp0E5YUN00-OY8_iYLRtpgg3hUq-q-6wP_fZ83nm_NmcAAFqqNdxYZOEtHwiM5DuY_">UNIX环境高级编程</a>和<a href="http://baike.baidu.com/link?url=NrnAFrPiVLXxkJx73BoJ8jDjQQbySMbQ2_yJn6QEeJNFhvuXD30G9UQZlyWHjNkguzBVDTKkrhwOl7IYfoVOv_">UNIX网络编程 卷一</a>。每翻开新的一页，就会学到很多，读起来非常的刺激。</p>
+
+<p>在看这两本书的时候，我有一点感悟。
+1. 仅仅实现功能，不是一个完整的系统，功能只是系统中的一个组成部分。一个完整的系统必须考虑到所有可能会出现的情况，一个具有较高鲁棒性的系统才配称作系统。
+2. 仅仅知道一个函数能完成什么功能是远远不够的，必须知道为了完成这个功能，函数做了什么。
+3. 网络编程中对TCP状态的把握很重要。</p>
+
+<p>下面是一些具体的笔记。</p>
+
+<h3>文件IO和标准IO库</h3>
+
+<p>文件IO是针对文件描述符的。文件IO是不带缓存的，也就是指每个read和write都调用内核中的一个系统调用。很显然不带缓存将会频繁的调用内核中的系统调用，造成效率比较低。而标准IO库提供缓存机制，以减少使用read和write调用内核系统调用的数量。</p>
+
+<p>对于标准IO库来说，它们的操作是围绕着流进行的。文件IO中使用open函数打开一个文件，在标准IO库中则使用fopen函数打开一个文件。使用它打开一个文件的同时，一个流就和一个文件相结合了。fopen函数返回一个指向FILE结构体的指针。这个结构体包括IO库为管理该流所需的所有信息，比如实际IO的文件描述符，指向流缓存的指针，缓存的长度，当前缓存中的字符数，出错标志等。对于每一个进程来说，系统都为他们预定义了三个流，分别是标准输入，标准输出，标准出错，可通过预定义文件指针stdin,stdout,stderr使用它们。</p>
+
+<p>标准IO库中的流是提供缓存的，而且系统自动提供缓存管理。有三种类型的缓存：</p>
+
+<ol>
+<li>全缓存。即当填满标准IO缓存后才进行实际IO操作。</li>
+<li>行缓存。当在输入和输出中遇到新行符时，标准IO库执行实际的IO操作。需要注意的是，因为标准IO库用来收集每一行缓存的长度是固定的，所以只要填满了该缓存，即使还没有写入一个新行符，也将进行实际的IO操作。</li>
+<li>不带缓存。典型的应用是在标准出错流上，因为出错信息需要尽快的显示出来。</li>
+</ol>
+
+
+<p>以下三个函数可用于一次读一个字符：</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">getc</span><span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">fgetc</span><span class="p">(</span><span class="kt">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">);</span>
+<span class="kt">int</span> <span class="nf">getchar</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span></code></pre></div>
+
+
+<p>前两个函数的区别是getc是被实现为宏的，而fgets不是宏，也就是说，调用fgets所需的时间一般会长于调用getc。而函数getchar则相当于getc(stdin)，即从标准输入读入一个字符。</p>
+
+<p>下面两个函数提供每次输入一行的功能：</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">char</span> <span class="o">*</span><span class="nf">fgets</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span><span class="kt">FILE</span> <span class="o">*</span><span class="n">fp</span><span class="p">);</span>
+<span class="kt">char</span> <span class="o">*</span><span class="nf">gets</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">);</span></code></pre></div>
+
+
+<p>gets从标准输入读，而fgets则从指定的流读。gets是一个不被推荐使用的函数，因为由于它不能指定缓存的长度，这样很可能会造成缓存越界。推荐总是使用fgets和fputs,即从指定流输入或输出一行。</p>
+
+<p>从书中给的数据来看，使用流缓存的程序比不使用缓存的程序要快得多，虽然两者的函数调用次数相同，但是使用流缓存的程序引起的系统调用次数远远低于函数调用次数，而系统调用与普通的函数调用相比是很花费时间的。</p>
+
+
+</div>
+
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>20 May 2014</span> <span class="seperator">~</span> <a href="/2014/05/20/mysql%E8%AF%AD%E5%8F%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8C%96.html">对mysql语句的性能分析与优化</a></li>
+    
+      <li><span>04 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/04/linux%E4%B8%8B%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6%E8%83%BD%E8%B6%85%E8%BF%872G%E5%90%97.html">Linux下生成的文件能超过2G吗？</a></li>
+    
+      <li><span>01 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/01/%E4%B8%80%E6%AE%B5%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%86%E6%9E%90.html">对一段程序的分析</a></li>
+    
+  </ul>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'jiangli10417githubio'; // required: replace example with your forum shortname
+                
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+		<div class="footer" align="center">
+            	<table>
+                <tr>
+                    <td>I'm on Github</td>
+                    <td><a target="_blank" href="http://github.com/jiangli10417/">github.com/jiangli10417</a></td>
+                </tr>
+                <tr>
+                    <td>Contact me</td>
+                    <td>jiangli10417@gmail.com</td>
+		 </tr>
+            	</table>
+        	</div>
+	</div>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-4155555-8']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+<html>

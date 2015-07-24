@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-gb">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Linux下生成的文件能超过2G吗？</title>
+	<meta name="author" content="inet" />
+	<link rel="stylesheet" href="/css/screen.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/tablet.css" type="text/css" media="screen and (min-width:651px) and (max-width: 1024px), screen and (min-device-width: 768px) and (max-device-width: 1024px)" />
+	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, screen and (max-width: 650px), screen and (max-device-width: 480px)" />
+     <link rel="stylesheet" href="/css/pygments.css">
+</head>
+<body>
+	<div class="site">
+		<div class="title"><a href="/">Jiangli10417<br/>Waiting for you</a></div>
+		<div id="post">
+	<h1>Linux下生成的文件能超过2G吗？</h1>
+	<p class="meta">04 Apr 2014</p>
+	<p>刚才写了一段代码，会生成很大的一个文件，程序执行过程中提示：file too large。然后查看了一下生成文件的大小，刚好2G。我知道FAT32文件系统单个文件最大只支持4G，却不知为何linux的ext4文件系统却只支持最大2G的单个文件，好吧，我刚开始就是这样想的，当然，最后我知道是我错怪ext4了。</p>
+
+<p><strong>提出一个问题，一个文件系统支持的文件大小与什么有关？</strong></p>
+
+<p>对此鸟哥的私房菜中对此已做了比较深入的讲解：<a href="http://vbird.dic.ksu.edu.tw/linux_basic/0230filesystem.php#harddisk-inode">点我查看</a></p>
+
+<p>以ext2文件系统来说的话，支持的单个文件大小与block的大小有关，Block 大小为1KB时，最大单一文件限制为16GB，最大文件系统总量为2TB，2KB时分别是256GB和8TB，4KB时分别为2TB和16TB。</p>
+
+<p>感觉文件系统的逻辑结构还是很重要的。</p>
+
+<p>ext2对单个文件至少都能支持16GB，那么ext4当然不可能小于16GB了。查了一下，现在ext3支持最大16TB的文件系统，单个文件最大2TB。Ext4最大支持1EB文件系统，和单个16TB的文件。至此，我明白2G的文件限制肯定不是文件系统造成的。</p>
+
+<p><strong>于是有一个核心问题需要解决，为什么不能生成大于2G的文件呢？</strong></p>
+
+<p>回想以前用过的lseek函数。所有打开的文件都有一个当前文件偏移量（current file offset），简称为 cfo。cfo 通常是一个非负整数，用于表明文件开始处到文件当前位置的字节数。<strong>读写操作通常开始于 cfo，并且使 cfo 增大</strong>，增量为读写的字节数。再看lseek的原型：off_t lseek(int handle, off_t offset, int fromwhere)。lseek所使用的cfo是off_t类型的，对于大多数系统，off_t类型默认是32位（可用sizeof(off_t)查看），也就是一个long型的，因此long型的数据只能表示正数到2<sup>32</sup>-1，也就是2G。当写文件的时候，cfo达到了2<sup>32</sup>-1（此时文件大小为2G），再往后就无法表示了，于是会返回file too large的错误。</p>
+
+<p><strong>最后一个问题，如何操作一个大于2G的文件？</strong></p>
+
+<p>从上面的分析我们知道，根本的原因在于off_t的表数范围，如何扩大它的表示范围是解决的思路。</p>
+
+<p>lseek函数的原型可在 /usr/include/unistd.h 中查看（unistd.h只是使用extern对lseek函数进行声明，真正定义的位置在内核源码中）：</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="k">extern</span> <span class="kt">__off_t</span> <span class="n">lseek</span> <span class="p">(</span><span class="kt">int</span> <span class="n">__fd</span><span class="p">,</span> <span class="kt">__off_t</span> <span class="n">__offset</span><span class="p">,</span> <span class="kt">int</span> <span class="n">__whence</span><span class="p">)</span> <span class="n">__THROW</span></code></pre></div>
+
+
+<p>用户态使用的lseek接口是：</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="kt">off_t</span> <span class="nf">lseek</span><span class="p">(</span><span class="kt">int</span> <span class="n">fd</span><span class="p">,</span> <span class="kt">off_t</span> <span class="n">offset</span><span class="p">,</span> <span class="kt">int</span> <span class="n">whence</span><span class="p">);</span></code></pre></div>
+
+
+<p>继续在/usr/include中查找off_t类型的定义：</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#ifndef __USE_FILE_OFFSET64</span>
+<span class="k">typedef</span> <span class="kt">__off_t</span> <span class="kt">off_t</span><span class="p">;</span>
+<span class="cp">#else</span>
+<span class="k">typedef</span> <span class="kt">__off64_t</span> <span class="kt">off_t</span><span class="p">;</span></code></pre></div>
+
+
+<p>从这段宏定义中，可以看到系统是通过<strong>USE_FILE_OFFSET64来定义off_t到底属于哪一种类型的。</strong>off64_t，从字面上就知道肯定是64位的，如果使用它的话，可以操作的文件最大将可以是(2<sup>63</sup>-1)B。</p>
+
+<p>继续搜索__USE_FILE_OFFSET64这个宏：在sys/types.h中有如下定义：</p>
+
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#if defined _FILE_OFFSET_BITS &amp;&amp; _FILE_OFFSET_BITS == 64</span>
+<span class="cp"># define __USE_FILE_OFFSET64    1</span>
+<span class="cp">#endif</span></code></pre></div>
+
+
+<p>因此定义<em>FILE_OFFSET_BITS为64将会使__USE_FILE_OFFSET64宏被定义，进而引发off_t的数据类型为</em>off64_t，进而我们可以操作大于2G的文件。</p>
+
+<p>于是解决方法就出来了，只需要要在编译时加上宏定义即可，比如：gcc -o program program.c -D_FILE_OFFSET_BITS=64。－D为宏定义，当然也可在应用程序中直接加入宏定义#define _FILE_OFFSET_BITS 64，不过必须放在#include unistd.h之前。</p>
+
+
+</div>
+
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>20 May 2014</span> <span class="seperator">~</span> <a href="/2014/05/20/mysql%E8%AF%AD%E5%8F%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8C%96.html">对mysql语句的性能分析与优化</a></li>
+    
+      <li><span>01 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/01/%E4%B8%80%E6%AE%B5%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%86%E6%9E%90.html">对一段程序的分析</a></li>
+    
+      <li><span>30 Mar 2014</span> <span class="seperator">~</span> <a href="/2014/03/30/UNIX%E9%AB%98%E7%BA%A7%E7%BC%96%E7%A8%8B%E4%B8%8E%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89.html">UNIX高级编程与网络编程读书笔记（一）</a></li>
+    
+  </ul>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'jiangli10417githubio'; // required: replace example with your forum shortname
+                
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+		<div class="footer" align="center">
+            	<table>
+                <tr>
+                    <td>I'm on Github</td>
+                    <td><a target="_blank" href="http://github.com/jiangli10417/">github.com/jiangli10417</a></td>
+                </tr>
+                <tr>
+                    <td>Contact me</td>
+                    <td>jiangli10417@gmail.com</td>
+		 </tr>
+            	</table>
+        	</div>
+	</div>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-4155555-8']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+<html>

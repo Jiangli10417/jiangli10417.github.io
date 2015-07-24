@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-gb">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>TCP连接终止与TIME_WAIT状态</title>
+	<meta name="author" content="inet" />
+	<link rel="stylesheet" href="/css/screen.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/tablet.css" type="text/css" media="screen and (min-width:651px) and (max-width: 1024px), screen and (min-device-width: 768px) and (max-device-width: 1024px)" />
+	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, screen and (max-width: 650px), screen and (max-device-width: 480px)" />
+     <link rel="stylesheet" href="/css/pygments.css">
+</head>
+<body>
+	<div class="site">
+		<div class="title"><a href="/">Jiangli10417<br/>Waiting for you</a></div>
+		<div id="post">
+	<h1>TCP连接终止与TIME_WAIT状态</h1>
+	<p class="meta">26 Mar 2014</p>
+	<h3>TCP连接的断开过程</h3>
+
+<p>TCP建立连接需要3个分组，终止一个连接则需要4个分组。过程如下:</p>
+
+<ol>
+<li>某个应用进程首先调用close,称该端执行<strong>主动关闭</strong>，该端的TCP于是发送一个FIN分组，表示后面没有数据要再发送了。</li>
+<li>接收到这个FIN的对端执行<strong>被动关闭</strong>，这个FIN由TCP确认。它的接收也作为一个文件结束符传递给接收端应用程序（放在已排队等候该应用程序接收的任何其他数据之后）。</li>
+<li>一段时间后，接收到这个文件结束符的应用进程调用close关闭它的套接字。这会导致它的TCP也发送一个FIN。</li>
+<li>接收到这个最终FIN的原发端TCP确认这个FIN。</li>
+</ol>
+
+
+<h3>TIME_WAIT状态为什么要存在</h3>
+
+<p>TIME_WAIT状态有两个存在的理由</p>
+
+<ol>
+<li>可靠地实现TCP全双工连接的终止。</li>
+<li>允许老的重复分组在网络中消逝。</li>
+</ol>
+
+
+<p><img src="/images/tcp_close.png" alt="" /></p>
+
+<p>对第一个理由的解释：如上图所示，如果执行主动关闭的一端（即最先发出FIN的一端）的最后一个ACK确认丢失，服务器将重新发送它的最终的那个FIN，因此客户端必须维护状态信息，以允许它重新发送最终那个ACK。要是客户端不维护这个信息的话，它将响应一个RST，该分组将被服务器解释成一个错误。如果TCP打算执行所有必要的工作以彻底终止某个连接上两个方向的数据流（即全双工关闭），那么它必须正确处理连接终止序列4个分组中任何一个分组丢失的情况。执行主动关闭的那一端是处于TIME_WAIT状态的那一端：因为可能不得不重传最终那个ACK的就是那一端。</p>
+
+<p>为理解第二个理由，假设在172.16.18.11：1500和172.16.18.13：1200之间有一个TCP连接。现在关闭这个连接，过一段时间后在相同的IP和端口之间建立另一个连接。这里把后一个连接称为前一个连接的化身。TCP必须防止来自某个连接的老的重复分组在该连接已终止后再现，从而被误解成属于同一连接的化身。为做到这一点，TCP将不给处于TIME_WAIT状态的连接发起新的化身。既然TIME_WAIT状态的持续时间是MSL（MSL是任何数据报能够在因特网中存活的最长时间）的2倍，这就足以让某个方向上的分组最多存活MSL秒即被丢弃，另一个方向上的应答最多存活MSL秒也被丢弃。通过这个规则，就可以保证每成功建立一个TCP连接时，来自该连接先前化身的老的重复的分组都已经在网络中消逝了。</p>
+
+
+</div>
+
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>20 May 2014</span> <span class="seperator">~</span> <a href="/2014/05/20/mysql%E8%AF%AD%E5%8F%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8C%96.html">对mysql语句的性能分析与优化</a></li>
+    
+      <li><span>04 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/04/linux%E4%B8%8B%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6%E8%83%BD%E8%B6%85%E8%BF%872G%E5%90%97.html">Linux下生成的文件能超过2G吗？</a></li>
+    
+      <li><span>01 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/01/%E4%B8%80%E6%AE%B5%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%86%E6%9E%90.html">对一段程序的分析</a></li>
+    
+  </ul>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'jiangli10417githubio'; // required: replace example with your forum shortname
+                
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+		<div class="footer" align="center">
+            	<table>
+                <tr>
+                    <td>I'm on Github</td>
+                    <td><a target="_blank" href="http://github.com/jiangli10417/">github.com/jiangli10417</a></td>
+                </tr>
+                <tr>
+                    <td>Contact me</td>
+                    <td>jiangli10417@gmail.com</td>
+		 </tr>
+            	</table>
+        	</div>
+	</div>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-4155555-8']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+<html>
