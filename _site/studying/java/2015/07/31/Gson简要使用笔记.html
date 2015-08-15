@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-gb">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Gson简要使用笔记</title>
+	<meta name="author" content="inet" />
+	<link rel="stylesheet" href="/css/screen.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/tablet.css" type="text/css" media="screen and (min-width:651px) and (max-width: 1024px), screen and (min-device-width: 768px) and (max-device-width: 1024px)" />
+	<link rel="stylesheet" href="/css/mobile.css" type="text/css" media="handheld, screen and (max-width: 650px), screen and (max-device-width: 480px)" />
+     <link rel="stylesheet" href="/css/pygments.css">
+</head>
+<body>
+	<div class="site">
+		<div class="title"><a href="/">Jiangli10417<br/>Waiting for you</a></div>
+		<div id="post">
+	<h1>Gson简要使用笔记</h1>
+	<p class="meta">31 Jul 2015</p>
+	<p>最近在做一个java web service项目，需要用到jason，本人对java不是特别精通，于是开始搜索一些java平台的json类库。</p>
+<p>发现了google的gson，因为之前对于protocolbuf有一些了解，带着一些好奇心，我开始使用了gson。</p>
+<p>经过比较，gson和其他现有java json类库最大的不同时gson需要序列化得实体类不需要使用annotation来标识需要序列化得字段，同时gson又可以通过使用annotation来灵活配置需要序列化的字段。</p>
+<p>下面是一个简单的例子：</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('b710e1bb-d88b-452e-9b6b-7e103d576c5d')"><img src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" class="code_img_closed" id="code_img_closed_b710e1bb-d88b-452e-9b6b-7e103d576c5d" /><img src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" class="code_img_opened" id="code_img_opened_b710e1bb-d88b-452e-9b6b-7e103d576c5d" onclick="cnblogs_code_hide('b710e1bb-d88b-452e-9b6b-7e103d576c5d',event)" style="display: none;" /><span class="cnblogs_code_collapse">Person实体</span>
+<div id="cnblogs_code_open_b710e1bb-d88b-452e-9b6b-7e103d576c5d" class="cnblogs_code_hide">
+<pre><div><span style="color: #0000ff;">public</span><span style="color: #000000;"> </span><span style="color: #0000ff;">class</span><span style="color: #000000;"> Person {<br /><br />    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> String name;<br />    </span><span style="color: #0000ff;">private</span><span style="color: #000000;"> </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> age;<br /><br />    </span><span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * </span><span style="color: #808080;">@return</span><span style="color: #008000;"> the name<br />     </span><span style="color: #008000;">*/</span><span style="color: #000000;"><br />    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String getName() {<br />        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> name;<br />    }<br /><br />    </span><span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> name the name to set<br />     </span><span style="color: #008000;">*/</span><span style="color: #000000;"><br />    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> setName(String name) {<br />        </span><span style="color: #0000ff;">this</span><span style="color: #000000;">.name </span><span style="color: #000000;">=</span><span style="color: #000000;"> name;<br />    }<br /><br />    </span><span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * </span><span style="color: #808080;">@return</span><span style="color: #008000;"> the age<br />     </span><span style="color: #008000;">*/</span><span style="color: #000000;"><br />    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> </span><span style="color: #0000ff;">int</span><span style="color: #000000;"> getAge() {<br />        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> age;<br />    }<br /><br />    </span><span style="color: #008000;">/**</span><span style="color: #008000;"><br />     * </span><span style="color: #808080;">@param</span><span style="color: #008000;"> age the age to set<br />     </span><span style="color: #008000;">*/</span><span style="color: #000000;"><br />    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> </span><span style="color: #0000ff;">void</span><span style="color: #000000;"> setAge(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> age) {<br />        </span><span style="color: #0000ff;">this</span><span style="color: #000000;">.age </span><span style="color: #000000;">=</span><span style="color: #000000;"> age;<br />    }<br />    <br />    @Override<br />    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> String toString()<br />    {<br />        </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> name </span><span style="color: #000000;">+</span><span style="color: #000000;"> </span><span style="color: #000000;">"</span><span style="color: #000000;">:</span><span style="color: #000000;">"</span><span style="color: #000000;"> </span><span style="color: #000000;">+</span><span style="color: #000000;">age;<br />    }<br />}</span></div></pre>
+</div>
+</div>
+<p>实体很简单，两个字段，当然实体中的字段也可以是List或者Set类型的。</p>
+<div class="cnblogs_code" onclick="cnblogs_code_show('584cdd2b-444d-4a1a-85d8-8ab0f4d0a25e')"><img src="http://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif" class="code_img_closed" id="code_img_closed_584cdd2b-444d-4a1a-85d8-8ab0f4d0a25e" /><img src="http://images.cnblogs.com/OutliningIndicators/ExpandedBlockStart.gif" class="code_img_opened" id="code_img_opened_584cdd2b-444d-4a1a-85d8-8ab0f4d0a25e" onclick="cnblogs_code_hide('584cdd2b-444d-4a1a-85d8-8ab0f4d0a25e',event)" style="display: none;" /><span class="cnblogs_code_collapse">生成Json字符串</span>
+<div id="cnblogs_code_open_584cdd2b-444d-4a1a-85d8-8ab0f4d0a25e" class="cnblogs_code_hide">
+<pre><div><span style="color: #000000;">Gson gson </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Gson();<br />List</span><span style="color: #000000;">&lt;</span><span style="color: #000000;">Person</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"> persons </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">new</span><span style="color: #000000;"> ArrayList</span><span style="color: #000000;">&lt;</span><span style="color: #000000;">Person</span><span style="color: #000000;">&gt;</span><span style="color: #000000;">();<br /></span><span style="color: #0000ff;">for</span><span style="color: #000000;"> (</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #000000;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> </span><span style="color: #000000;">10</span><span style="color: #000000;">; i</span><span style="color: #000000;">++</span><span style="color: #000000;">) {<br />     Person p </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">new</span><span style="color: #000000;"> Person();<br />     p.setName(</span><span style="color: #000000;">"</span><span style="color: #000000;">name</span><span style="color: #000000;">"</span><span style="color: #000000;"> </span><span style="color: #000000;">+</span><span style="color: #000000;"> i);<br />     p.setAge(i </span><span style="color: #000000;">*</span><span style="color: #000000;"> </span><span style="color: #000000;">5</span><span style="color: #000000;">);<br />     persons.add(p);<br />}<br />String str </span><span style="color: #000000;">=</span><span style="color: #000000;"> gson.toJson(persons);</span></div></pre>
+</div>
+</div>
+<p>上面的代码重点是Gson对象，它提供了toJason()方法将对象转换成Json字符串，上面代码的str对象值为：</p>
+<p>[{"name":"name0","age":0},{"name":"name1","age":5},{"name":"name2","age":10},{"name":"name3","age":15},{"name":"name4","age":20},{"name":"name5","age":25},{"name":"name6","age":30},{"name":"name7","age":35},{"name":"name8","age":40},{"name":"name9","age":45}]</p>
+<p>很标准的json数据，很简单吧，呵呵。</p>
+<p>下面来看看gson的反序列化，Gson提供了fromJson()方法来实现从Json相关对象到java实体的方法。</p>
+<p>在日常应用中，我们一般都会碰到两种情况，转成单一实体对象和转换成对象列表或者其他结构。</p>
+<p>先来看第一种：</p>
+<p>比如json字符串为：[{"name":"name0","age":0}]</p>
+<p>代码:</p>
+<div class="cnblogs_code">
+<pre><div><span style="color: #000000;">Person person </span><span style="color: #000000;">=</span><span style="color: #000000;"> gson.fromJson(str, Person.</span><span style="color: #0000ff;">class</span><span style="color: #000000;">);</span></div></pre>
+</div>
+<p>提供两个参数，分别是json字符串以及需要转换对象的类型。</p>
+<p>第二种，转换成列表类型：</p>
+<p>代码:</p>
+<div class="cnblogs_code">
+<pre><div><span style="color: #000000;">List</span><span style="color: #000000;">&lt;</span><span style="color: #000000;">Person</span><span style="color: #000000;">&gt;</span><span style="color: #000000;"> ps </span><span style="color: #000000;">=</span><span style="color: #000000;"> gson.fromJson(str, </span><span style="color: #0000ff;">new</span><span style="color: #000000;"> TypeToken</span><span style="color: #000000;">&lt;</span><span style="color: #000000;">List</span><span style="color: #000000;">&lt;</span><span style="color: #000000;">Person</span><span style="color: #000000;">&gt;&gt;</span><span style="color: #000000;">(){}.getType());<br /></span><span style="color: #0000ff;">for</span><span style="color: #000000;">(</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> i </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #000000;">0</span><span style="color: #000000;">; i </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> ps.size() ; i</span><span style="color: #000000;">++</span><span style="color: #000000;">)<br />{<br />     Person p </span><span style="color: #000000;">=</span><span style="color: #000000;"> ps.get(i);<br />     System.out.println(p.toString());<br />}</span></div></pre>
+</div>
+<p>可以看到上面的代码使用了TypeToken，它是gson提供的数据类型转换器，可以支持各种数据集合类型转换。</p>
+<p>Gson的基本使用就是这么多，至于annotation方面可以参考gson的官方文档，希望能对初学java和gson的同学有所帮助。</p>
+
+
+</div>
+
+
+
+<div id="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>20 May 2014</span> <span class="seperator">~</span> <a href="/2014/05/20/mysql%E8%AF%AD%E5%8F%A5%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90%E4%B8%8E%E4%BC%98%E5%8C%96.html">对mysql语句的性能分析与优化</a></li>
+    
+      <li><span>04 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/04/linux%E4%B8%8B%E7%94%9F%E6%88%90%E7%9A%84%E6%96%87%E4%BB%B6%E8%83%BD%E8%B6%85%E8%BF%872G%E5%90%97.html">Linux下生成的文件能超过2G吗？</a></li>
+    
+      <li><span>01 Apr 2014</span> <span class="seperator">~</span> <a href="/2014/04/01/%E4%B8%80%E6%AE%B5%E7%A8%8B%E5%BA%8F%E7%9A%84%E5%88%86%E6%9E%90.html">对一段程序的分析</a></li>
+    
+  </ul>
+</div>
+
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'jiangli10417githubio'; // required: replace example with your forum shortname
+                
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+		<div class="footer" align="center">
+            	<table>
+                <tr>
+                    <td>I'm on Github</td>
+                    <td><a target="_blank" href="http://github.com/jiangli10417/">github.com/jiangli10417</a></td>
+                </tr>
+                <tr>
+                    <td>Contact me</td>
+                    <td>jiangli10417@gmail.com</td>
+		 </tr>
+            	</table>
+        	</div>
+	</div>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+        _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+        _gaq.push(['_setAccount', 'UA-4155555-8']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+<html>
